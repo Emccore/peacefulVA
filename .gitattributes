@@ -1,0 +1,5 @@
+* text=auto
+*.sh text eol=lf
+*.go text
+*.ps1 text
+*.md text
