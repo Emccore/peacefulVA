@@ -1,0 +1,20 @@
+{
+  "addr": ":6767",
+  "tls_mode": "manual",
+  "cert_file": "cert.pem",
+  "key_file": "key.pem",
+  "domain": "",
+  "cert_cache": "certs",
+  "data_dir": "data",
+  "open_registration": true,
+  "registration_code": "",
+  "trust_proxy": false,
+  "secure_cookies": false,
+  "ice_servers": [
+    "stun:stun.l.google.com:19302"
+  ],
+  "turn_url": "",
+  "turn_user": "",
+  "turn_pass": "",
+  "log_ips": false
+}

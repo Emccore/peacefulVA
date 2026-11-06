@@ -1,0 +1,39 @@
+# /etc/systemd/system/peacefulva.service
+# 部署: 把 peacefulVA-server-linux-amd64、config.json、(可选)cert.pem/key.pem 放到 /opt/peacefulva
+#       然后 systemctl daemon-reload && systemctl enable --now peacefulva
+# 说明: AmbientCapabilities 让非 root 用户也能绑定 6767 及以下端口
+[Unit]
+Description=peacefulVA Server (WebRTC signaling + HTTPS)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/opt/peacefulva/peacefulVA-server-linux-amd64 -config /opt/peacefulva/config.json
+WorkingDirectory=/opt/peacefulva
+User=peacefulva
+Group=peacefulva
+Restart=on-failure
+RestartSec=3
+
+# 非 root 也能监听端口
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+# 加固
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+SystemCallArchitectures=native
+ReadWritePaths=/opt/peacefulva/data /opt/peacefulva/certs
+
+[Install]
+WantedBy=multi-user.target

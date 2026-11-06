@@ -1,0 +1,31 @@
+# coturn 参考配置（严格 NAT 环境的 TURN 兜底，可选）
+# 与 p2pchat 同机部署时：p2pchat 占用 TCP 443，coturn 走 UDP 443，互不冲突
+# apt install coturn  后把本文件放到 /etc/turnserver.conf，systemctl enable --now coturn
+
+listening-port=443
+# 同机部署时只开 UDP，避免和 p2pchat 的 TCP 443 抢端口
+no-tcp
+no-tls
+no-dtls
+
+# 公网部署时填写本机公网 IP（NAT 后面必填）
+# external-ip=203.0.113.10
+listening-ip=0.0.0.0
+relay-ip=0.0.0.0
+
+# 长期凭证模式，用户名密码需与 peacefulVA config.json 的 turn_url/turn_user/turn_pass 一致
+lt-cred-mech
+user=myturn:some-strong-password
+
+# 只中继 13200-14200 端口（SAP 轮连中继区间，见项目订正日志），防火墙放行对应 UDP
+min-port=13200
+max-port=14200
+
+# 不做中继转发白名单以外的任何事情，减小滥用面
+no-multicast-peers
+no-cli
+
+# 隐私：不记录用户活动日志
+simple-log
+log-file=/var/log/turnserver.log
+stale-nonce=600

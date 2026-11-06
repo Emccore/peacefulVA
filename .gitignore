@@ -1,0 +1,14 @@
+# 运行时数据与密钥不入库
+data/
+certs/
+backups/
+*.pem
+*.key
+*.lock
+config.dev.json
+*.log
+
+# 构建产物（部署用本地编译或 release）
+peacefulVA-server.exe
+peacefulVA-server-linux-amd64
+peacefulVA-server-linux-arm64
