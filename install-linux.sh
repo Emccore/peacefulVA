@@ -135,9 +135,10 @@ ensure_binary() {
 
 gen_config() {
   local config="$1"
+  local re_reg='^[A-Za-z0-9@#%^&_=+-]*$'
   [[ -f "$config" ]] && { say "配置已存在，保持不变: $config"; return 0; }
   [[ "$DOMAIN" =~ ^[A-Za-z0-9.-]*$ ]] || die "域名含非法字符"
-  [[ "$REG_CODE" =~ ^[A-Za-z0-9@#%^&_=+-]*$ ]] || die "注册码含非法字符"
+  [[ "$REG_CODE" =~ $re_reg ]] || die "注册码含非法字符"
   cat > "$config" <<EOF
 {
   "addr": ":${PORT}",
