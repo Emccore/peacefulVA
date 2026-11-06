@@ -1,5 +1,7 @@
 # peacefulVA
 
+[English](README.en.md) | [中文](README.md)
+
 基于 WebRTC 的浏览器端音视频通话服务。音视频在浏览器之间 P2P 直连（DTLS-SRTP 加密），服务器仅承担信令中转与页面托管；文字消息经 ECDH 密钥协商后端到端加密，服务器全程只接触密文。单二进制部署，无外部运行时依赖。
 
 ## 特性

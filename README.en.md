@@ -1,5 +1,7 @@
 # peacefulVA
 
+[English](README.en.md) | [中文](README.md)
+
 Browser-based voice and video calling built on WebRTC. Media streams are peer-to-peer between browsers (DTLS-SRTP encrypted); the server only relays signaling and serves the web client. Text messages are end-to-end encrypted via ECDH key agreement — the server never sees plaintext. Single-binary deployment with no external runtime dependencies.
 
 ## Features
